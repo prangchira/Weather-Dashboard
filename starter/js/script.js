@@ -1,51 +1,33 @@
 var City = "London";
+var APIKey = "ffd05df6c97797788dd5eb72d5a56cb0"
 var NumberOfDay = 5;
+var ForecastIcon
+var lat
+var lon
+var Forecast = $('#forecast');
+var queryURL_Geo = `http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=${APIKey}`
 
+
+
+
+ForcastHeader = $('<div>').text(`${NumberOfDay}-Day Forecast:`);
+Forecast.append(ForcastHeader);
 
 $('#search-button').on("click",function(event){
     event.preventDefault();
     City = $('#search-input').val();
-
     todayHeading = $('<div>').text(`${City} (${dayjs().format('DD/MM/YYYY')})`);
     TodayBox.append(todayHeading);
-    
-    
 })
 
 var City = $('#search-input').val();
 console.log(City);
 
 
+var TodayWeather = $('#today');
+TodayBox = $('<div>').addClass("card").attr(id="TodayBox");
+// Today.append(TodayBox);
 
-var TodayBox = $('#today');
-
-
-
-// todayHeading.text(City);
-
-
-var Forecast = $('#forecast');
-ForcastHeader = $('<div>').text(`${NumberOfDay}-Day Forecast:`);
-Forecast.append(ForcastHeader);
-for(var i = 0; i<NumberOfDay;i++){
-    ForecastBox = $('<div>').addClass("card")
-    ForecastDate = $('<p>').text(dayjs().format('DD/MM/YYYY'))
-    ForecastBox.append(ForecastDate);
-    Forecast.append(ForecastBox);
-}
-
-
-ForecastBox = $('<div>').addClass("card")
-ForecastDate = $('<p>').text(dayjs().format('DD/MM/YYYY'))
-
-var APIKey = "ffd05df6c97797788dd5eb72d5a56cb0"
-var lat
-var lon
-
-
-
-// var queryURL_Geo = `http://api.openweathermap.org/geo/1.0/direct?q=${City}&limit=5&appid=${APIKey}`
-var queryURL_Geo = `http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=${APIKey}`
 
 
 fetch(queryURL_Geo)
@@ -92,24 +74,14 @@ fetch(queryURL_Geo)
                     var Wind = dataForecast.list[i].wind.speed;
                     var Humidity = dataForecast.list[i].main.humidity;
                     
-
-                    console.log(Date);
-                    console.log(Icon);
-                    console.log(Temp);
-                    console.log(Wind);
-                    console.log(Humidity);
-
+                    var ForecastBox = $('<div>').addClass("card")
+                    var ForecastDate = $('<p>').text(dayjs(Date).format('DD/MM/YYYY')).addClass("card-date");
+                    var ForecastIcon = $('<img>').addClass("icon").attr('src', `http://openweathermap.org/img/w/${Icon}.png`);
+                    var ForecastTemp = $('<p>').text(`Temp: ${(Temp-273.15).toFixed(2)} °C`)
+                    var ForecastWind = $('<p>').text(`Wind: ${Wind} KPH`)
+                    var ForecastHumidity = $('<p>').text(`Humidity: ${Humidity} %`)
+                    ForecastBox.append(ForecastDate, ForecastIcon, ForecastTemp, ForecastWind, ForecastHumidity);
+                    Forecast.append(ForecastBox);
                 }
-
         });
-
-        
-
-
 });
-
-
-
-// http://openweathermap.org/img/w/10d.png
-
-
