@@ -46,7 +46,7 @@ $('#search-button').on("click",function(event){
     
     //Create the Box for the forcast and set it in container for CSS styling
     ForecastHeader = $('<h3>').text(`5-Day Forecast:`).addClass('ForecastHeader');
-    ForecastContainer = $('<div>').addClass('ForecastContainer');
+    ForecastContainer = $('<div>').addClass('ForecastContainer col');
     Forecast.append(ForecastHeader, ForecastContainer);
 
 
@@ -102,7 +102,7 @@ $('#search-button').on("click",function(event){
                     var Humidity = dataForecast.list[i].main.humidity;
                     
                     //Create HTML item to display each data in the card
-                    var ForecastBox = $('<div>').addClass("card")
+                    var ForecastBox = $('<div>').addClass("card col-lg-4 col-md-4 col-sm-12")
                     var ForecastDate = $('<p>').text(dayjs(Date).format('DD/MM/YYYY')).addClass("card-date");
                     var ForecastIcon = $('<img>').addClass("icon").attr('src', IconUrl);
                     var ForecastTemp = $('<p>').text(`Temp: ${(Temp-273.15).toFixed(2)} °C`)

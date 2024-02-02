@@ -59,6 +59,7 @@ aside{
 
 .ForecastContainer{
     display: flex;
+    /* flex-wrap: wrap; */
     
 }
 
