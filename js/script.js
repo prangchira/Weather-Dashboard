@@ -51,7 +51,7 @@ $('#search-button').on("click",function(event){
 
 
     //Create URL for API fetch to get latitude and longtitude from the City input
-     queryURL_Geo = `http://api.openweathermap.org/geo/1.0/direct?q=${City}&limit=5&appid=${APIKey}`
+     queryURL_Geo = `https://api.openweathermap.org/geo/1.0/direct?q=${City}&limit=5&appid=${APIKey}`
 
     //Fetch API for the City name
     fetch(queryURL_Geo)
@@ -71,7 +71,7 @@ $('#search-button').on("click",function(event){
             .then(function (dataWeather) {
                 //Get the current weather data from the API fetch
                 var Icon = dataWeather.weather[0].icon;
-                var IconUrl = `http://openweathermap.org/img/w/${Icon}.png`
+                var IconUrl = `https://openweathermap.org/img/w/${Icon}.png`
                 var Temp = dataWeather.main.temp;
                 var Wind = dataWeather.wind.speed;
                 var Humidity = dataWeather.main.humidity;
@@ -96,7 +96,7 @@ $('#search-button').on("click",function(event){
                 for (var i = 0; i <dataForecast.list.length; i+=8){
                     var Date = dataForecast.list[i].dt_txt;
                     var Icon = dataForecast.list[i].weather[0].icon;
-                    var IconUrl = `http://openweathermap.org/img/w/${Icon}.png`
+                    var IconUrl = `https://openweathermap.org/img/w/${Icon}.png`
                     var Temp = dataForecast.list[i].main.temp;
                     var Wind = dataForecast.list[i].wind.speed;
                     var Humidity = dataForecast.list[i].main.humidity;
